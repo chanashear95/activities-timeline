@@ -16,33 +16,42 @@
         </div>
       </div>
       <div>
-        <span v-if="item.score && item.possible_score" class="pr-5 green-text"
-          >Score <strong>{{ item.score }}</strong
-          >/<strong>{{ item.possible_score }}</strong>
-        </span>
-        <v-icon size="20" color="#008081">mdi-eye</v-icon>
-        <span class="font-weight-medium pl-1 green-text">View work</span>
+        <Score
+          v-if="item.score && item.possible_score"
+          :score="item.score"
+          :possibleScore="item.possible_score"
+        />
+        <v-icon @click="() => hideActivity(item.id)" size="20" color="#008081">mdi-eye</v-icon>
+        <button
+          @click="() => $router.push(`/${item.id}`)"
+          class="font-weight-medium pl-1 green-text"
+        >
+          View work
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { format } from "date-fns";
 import LineSeparator from "../common/LineSeparator.vue";
 import ActivityIcon from "./ActivityIcon.vue";
+import { formatDate } from "@/utils/formatting";
+import Score from "./Score.vue";
 
 export default {
   name: "ActivityListItem",
   props: ["item"],
   methods: {
-    formatDate(date) {
-      return format(date, "MMM dd, yyyy • hh:mm aaaaa'm'");
+    formatDate,
+    hideActivity(itemId) {
+      this.$store.commit("hideActivity", itemId);
     }
   },
   components: {
     LineSeparator,
-    ActivityIcon
+    ActivityIcon,
+    Score
   }
 };
 </script>

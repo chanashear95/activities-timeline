@@ -7,17 +7,18 @@
       <FilterBy @update-selected="updateFilterBy" :selected="filterBy" />
       <ActivityList :list="filteredActivities" />
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import { fetchActivities } from "@/services/activities.js";
-import ActivityList from "../components/activities/ActivityList.vue";
-import Loading from "../components/common/Loading.vue";
-import FilterBy from "../components/filters/FilterBy.vue";
-import SearchBar from "../components/filters/SearchBar.vue";
+import ActivityList from "@/components/activity/ActivityList.vue";
+import Loading from "@/components/common/Loading.vue";
+import FilterBy from "@/components/filters/FilterBy.vue";
+import SearchBar from "@/components/filters/SearchBar.vue";
 import { capitalize } from "@/utils/formatting";
-import { generateFullActivityName } from "../utils/dataHelpers";
+import { generateFullActivityName } from "@/utils/dataHelpers";
 
 export default {
   name: "Activities",
@@ -40,7 +41,7 @@ export default {
   },
   computed: {
     allActivities() {
-      return this.$store.state.activities;
+      return this.$store.getters.getActivities;
     },
     filteredActivities() {
       return this.allActivities.filter(
