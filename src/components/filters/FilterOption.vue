@@ -6,12 +6,14 @@
     }"
     @click="() => $emit('toggle-selected')"
   >
-    <v-icon v-if="selected" size="15" color="#008081">mdi-check-circle</v-icon>
+    <v-icon v-if="selected" size="15" :color="$options.COLORS.MAIN_GREEN">mdi-check-circle</v-icon>
     {{ itemText }}
   </button>
 </template>
 
 <script>
+import { COLORS } from "@/styles/colors.js";
+
 export default {
   name: "FilterOption",
   props: {
@@ -27,7 +29,8 @@ export default {
       type: Boolean,
       default: false
     }
-  }
+  },
+  COLORS
 };
 </script>
 

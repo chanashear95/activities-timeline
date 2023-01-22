@@ -21,7 +21,9 @@
           :score="item.score"
           :possibleScore="item.possible_score"
         />
-        <v-icon @click="() => hideActivity(item.id)" size="20" color="#008081">mdi-eye</v-icon>
+        <v-icon @click="() => hideActivity(item.id)" size="20" :color="$options.COLORS.MAIN_GREEN"
+          >mdi-eye</v-icon
+        >
         <button
           v-if="doesItemSupportZoom(item)"
           @click="() => $router.push(getPath(item))"
@@ -42,6 +44,7 @@ import Score from "./Score.vue";
 import { generateFullActivityName } from "@/utils/dataHelpers";
 import { RESOURCE_TYPES } from "@/enums/dataTypes";
 import ApiV from "@/mixins/apiV.vue";
+import { COLORS } from "@/styles/colors.js";
 
 export default {
   name: "ActivityListItem",
@@ -52,6 +55,7 @@ export default {
   },
   mixins: [ApiV],
   props: ["item"],
+  COLORS,
   methods: {
     formatDate,
     generateFullActivityName,

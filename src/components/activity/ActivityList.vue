@@ -17,7 +17,7 @@
       v-if="shouldShowLoadMoreBtn"
       @click="loadMore"
     >
-      <v-icon color="#008081">mdi-chevron-down</v-icon>Load more
+      <v-icon :color="$options.COLORS.MAIN_GREEN">mdi-chevron-down</v-icon>Load more
     </button>
   </div>
 </template>
@@ -26,6 +26,7 @@
 import { MONTHS } from "@/enums/dates.js";
 import ActivityListItem from "./ActivityListItem.vue";
 import MonthSeparator from "./MonthSeparator.vue";
+import { COLORS } from "@/styles/colors.js";
 
 export default {
   name: "ActivityList",
@@ -40,6 +41,7 @@ export default {
     }
   },
   MAX_PER_SCROLL: 10,
+  COLORS,
   data() {
     return {
       currentScroll: 1
