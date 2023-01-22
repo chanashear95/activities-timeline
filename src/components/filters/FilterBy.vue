@@ -43,7 +43,6 @@ export default {
       this.$emit("update-selected", []);
     },
     toggleOption(option) {
-      console.log(option);
       const currentSelection = [...this.selected];
       const idx = currentSelection.indexOf(option);
       if (idx === -1) {
