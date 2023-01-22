@@ -12,14 +12,14 @@
         <div class="d-flex justify-end  align-center">
           <button
             @click="() => $router.replace('/')"
-            class="font-weight-medium rounded-circle outlined close-btn mb-2"
+            class="font-weight-black rounded-circle outlined close-btn mb-2"
           >
             X
           </button>
         </div>
         <div class="text-center pa-4">
           <ActivityIcon :icon-path="item.topic_data.icon_path" :product="item.product" />
-          <h1 class="mb-4">{{ capitalize(generateFullActivityName(item)) }}</h1>
+          <h1 class="mb-4">{{ generateFullActivityName(item) }}</h1>
           <span class="font-weight-light">{{ formatDate(Number(item.d_created)) }}</span>
         </div>
         <p class="mb-10 text-h5">{{ item.comment }}</p>
@@ -36,7 +36,6 @@
 <script>
 import ActivityIcon from "@/components/activity/ActivityIcon.vue";
 import { generateFullActivityName } from "@/utils/dataHelpers";
-import { capitalize } from "@/utils/formatting";
 import { formatDate } from "@/utils/formatting";
 import Score from "../components/activity/Score.vue";
 
@@ -54,7 +53,6 @@ export default {
   },
   methods: {
     generateFullActivityName,
-    capitalize,
     formatDate
   }
 };
@@ -62,14 +60,13 @@ export default {
 
 <style scoped lang="scss">
 .close-btn {
-  border: 2px solid var(--dark-grey);
+  border: 3px solid var(--dark-grey);
   width: 25px;
   height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  padding: 2px 0px 0px 1px;
   color: var(--dark-grey);
 }
 </style>

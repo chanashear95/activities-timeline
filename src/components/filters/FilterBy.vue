@@ -1,10 +1,11 @@
 <template>
   <div>
     <p class="ma-0">Filter by:</p>
-    <FilterOption :selected="isAllSelected" @toggle-selected="selectAll" value="All Work" />
+    <FilterOption :selected="isAllSelected" @toggle-selected="selectAll" item-text="All Work" />
     <FilterOption
-      v-for="item in $options.resourceTypes"
+      v-for="item in Object.keys($options.RESOURCE_TYPES)"
       :key="item"
+      :item-text="$options.RESOURCE_TYPES[item].text"
       :value="item"
       :selected="isItemSelected(item)"
       @toggle-selected="() => toggleOption(item)"
@@ -25,7 +26,7 @@ export default {
       default: () => []
     }
   },
-  resourceTypes: RESOURCE_TYPES,
+  RESOURCE_TYPES,
   computed: {
     isAllSelected() {
       return (

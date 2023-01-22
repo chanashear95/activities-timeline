@@ -1,14 +1,13 @@
 <template>
   <button
     :class="{
-      'filter-option green-text font-weight-medium pa-1 px-2 ma-1 ml-0 rounded text-capitalize': true,
+      'filter-option green-text font-weight-medium pa-1 px-2 ma-1 ml-0 rounded': true,
       selected: selected
     }"
     @click="() => $emit('toggle-selected')"
   >
     <v-icon v-if="selected" size="15" color="#008081">mdi-check-circle</v-icon>
-
-    {{ value.replaceAll("_", " ") }}
+    {{ itemText }}
   </button>
 </template>
 
@@ -17,6 +16,10 @@ export default {
   name: "FilterOption",
   props: {
     value: {
+      type: String,
+      default: ""
+    },
+    itemText: {
       type: String,
       default: ""
     },

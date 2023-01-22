@@ -7,8 +7,8 @@
       <div class="d-flex align-center">
         <ActivityIcon :icon-path="item.topic_data.icon_path" :product="item.product" />
         <div class="d-inline-block pl-3">
-          <p class="text-capitalize lh-14 ma-0 font-weight-medium">
-            {{ item.topic_data.name }} {{ item.resource_type.replaceAll("_", " ") }}
+          <p class="lh-14 ma-0 font-weight-medium">
+            {{ generateFullActivityName(item) }}
           </p>
           <span class="font-weight-light caption">{{
             formatDate(Number(item.d_created * 1000))
@@ -23,6 +23,7 @@
         />
         <v-icon @click="() => hideActivity(item.id)" size="20" color="#008081">mdi-eye</v-icon>
         <button
+          v-if="doesItemSupportZoom(item)"
           @click="() => $router.push(`/${item.id}`)"
           class="font-weight-medium pl-1 green-text"
         >
@@ -38,20 +39,26 @@ import LineSeparator from "../common/LineSeparator.vue";
 import ActivityIcon from "./ActivityIcon.vue";
 import { formatDate } from "@/utils/formatting";
 import Score from "./Score.vue";
+import { generateFullActivityName } from "@/utils/dataHelpers";
+import { RESOURCE_TYPES } from "@/enums/dataTypes";
 
 export default {
   name: "ActivityListItem",
-  props: ["item"],
-  methods: {
-    formatDate,
-    hideActivity(itemId) {
-      this.$store.commit("hideActivity", itemId);
-    }
-  },
   components: {
     LineSeparator,
     ActivityIcon,
     Score
+  },
+  props: ["item"],
+  methods: {
+    formatDate,
+    generateFullActivityName,
+    hideActivity(itemId) {
+      this.$store.commit("hideActivity", itemId);
+    },
+    doesItemSupportZoom(item) {
+      return RESOURCE_TYPES[item.resource_type].zoom;
+    }
   }
 };
 </script>

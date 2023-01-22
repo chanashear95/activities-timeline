@@ -3,6 +3,7 @@ import store from "@/store/store";
 
 export const fetchActivities = async () => {
   try {
+    if (store.getters.getActivities.length > 0) return;
     const res = await fetch(SERVER_URL + "activities/v1", {
       method: "GET",
       headers: {
