@@ -35,6 +35,10 @@ export default {
 .filter-option {
   border: 1px solid var(--main-green);
   font-size: 14px;
+  transition: 0.2s ease-in-out all;
+  &:hover {
+    background-color: var(--mint-green);
+  }
   &.selected {
     background-color: var(--mint-green);
   }

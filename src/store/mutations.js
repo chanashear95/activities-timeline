@@ -4,5 +4,9 @@ export const mutations = {
   },
   hideActivity: (state, activityId) => {
     state.hiddenActivities.push(activityId);
+  },
+  setErrToast: (state, err) => {
+    console.log("in");
+    state.errToast = err;
   }
 };

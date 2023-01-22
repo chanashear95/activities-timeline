@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state() {
     return {
       activities: [],
-      hiddenActivities: []
+      hiddenActivities: [],
+      errToast: null
     };
   },
   getters: getters,

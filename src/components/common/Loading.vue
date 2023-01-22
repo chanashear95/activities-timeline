@@ -1,5 +1,5 @@
 <template>
-  <p>Loading...</p>
+  <v-progress-circular indeterminate color="#008081"></v-progress-circular>
 </template>
 
 <script>

@@ -30,7 +30,8 @@ export default {
   computed: {
     isAllSelected() {
       return (
-        this.selected.length === 0 || this.selected.length === this.$options.resourceTypes.length
+        this.selected.length === 0 ||
+        this.selected.length === Object.keys(this.$options.RESOURCE_TYPES).length
       );
     }
   },
@@ -42,6 +43,7 @@ export default {
       this.$emit("update-selected", []);
     },
     toggleOption(option) {
+      console.log(option);
       const currentSelection = [...this.selected];
       const idx = currentSelection.indexOf(option);
       if (idx === -1) {

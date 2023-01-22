@@ -25,7 +25,7 @@
         <button
           v-if="doesItemSupportZoom(item)"
           @click="() => $router.push(getPath(item))"
-          class="font-weight-medium pl-1 green-text"
+          class="view-work font-weight-medium pl-1 green-text"
         >
           View work
         </button>
@@ -71,8 +71,14 @@ export default {
 <style lang="scss" scoped>
 .activity-container {
   border: 1px solid var(--light-grey);
-}
-.lh-14 {
-  line-height: 14px;
+  .lh-14 {
+    line-height: 14px;
+  }
+  .view-work {
+    transition: 0.2s ease-in-out all;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }
 </style>
