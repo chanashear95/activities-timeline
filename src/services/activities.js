@@ -18,7 +18,6 @@ export const fetchActivities = async isV2 => {
   } catch (e) {
     const err = "An error occurred, please try again.";
     store.commit("setErrToast", err);
-    return [];
   }
 };
 

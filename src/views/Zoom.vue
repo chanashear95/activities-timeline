@@ -11,7 +11,7 @@
       <v-card v-if="item" class="px-4 py-2 pb-4">
         <div class="d-flex justify-end  align-center">
           <button
-            @click="navigatBack"
+            @click="navigateBack"
             class="font-weight-black rounded-circle outlined close-btn d-flex align-center justify-center mb-2"
           >
             X
@@ -56,7 +56,7 @@ export default {
   methods: {
     generateFullActivityName,
     formatDate,
-    navigatBack() {
+    navigateBack() {
       this.$router.replace(this.isV2 ? "/v2" : "/");
     }
   }

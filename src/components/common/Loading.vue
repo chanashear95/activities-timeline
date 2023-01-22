@@ -1,5 +1,5 @@
 <template>
-  <v-progress-circular indeterminate :color="$options.COLORS.MAIN_GREEN"></v-progress-circular>
+  <v-progress-circular indeterminate :color="$options.COLORS.MAIN_GREEN" />
 </template>
 
 <script>

@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     paginatedList() {
-      return this.list.slice(0, this.currentScroll * this.$options.MAX_PER_SCROLL);
+      return [...this.list].slice(0, this.currentScroll * this.$options.MAX_PER_SCROLL);
     },
     shouldShowLoadMoreBtn() {
       return this.paginatedList.length !== this.list.length;

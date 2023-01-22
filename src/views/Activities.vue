@@ -7,7 +7,7 @@
       <FilterBy @update-selected="updateFilterBy" :selected="filterBy" />
       <ActivityList :list="filteredActivities" />
     </div>
-    <router-view :key="$route.path"></router-view>
+    <router-view :key="$route.path" />
   </div>
 </template>
 
