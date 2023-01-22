@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { getters } from "./getters";
-import { mutations } from "./mutations";
+import { getters } from "@/store/getters";
+import { mutations } from "@/store/mutations";
 
 Vue.use(Vuex);
 

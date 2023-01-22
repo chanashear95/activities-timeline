@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ToastMessage from "./components/common/ToastMessage.vue";
+import ToastMessage from "@/components/common/ToastMessage.vue";
 
 export default {
   name: "App",

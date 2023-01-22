@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import LineSeparator from "../common/LineSeparator.vue";
+import LineSeparator from "@/components/common/LineSeparator.vue";
 
 export default {
   name: "MonthSeparator",

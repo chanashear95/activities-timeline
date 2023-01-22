@@ -12,7 +12,7 @@
         <div class="d-flex justify-end  align-center">
           <button
             @click="navigatBack"
-            class="font-weight-black rounded-circle outlined close-btn mb-2"
+            class="font-weight-black rounded-circle outlined close-btn d-flex align-center justify-center mb-2"
           >
             X
           </button>
@@ -68,9 +68,6 @@ export default {
   border: 3px solid var(--dark-grey);
   width: 25px;
   height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 16px;
   color: var(--dark-grey);
 }

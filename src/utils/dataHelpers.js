@@ -1,4 +1,4 @@
-import { RESOURCE_TYPES } from "../enums/dataTypes";
+import { RESOURCE_TYPES } from "@/enums/dataTypes";
 import { capitalize } from "@/utils/formatting";
 
 export const generateFullActivityName = item => {

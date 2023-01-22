@@ -15,7 +15,7 @@
 
 <script>
 import { RESOURCE_TYPES } from "@/enums/dataTypes.js";
-import FilterOption from "./FilterOption.vue";
+import FilterOption from "@/components/filters/FilterOption.vue";
 
 export default {
   name: "FilterBy",

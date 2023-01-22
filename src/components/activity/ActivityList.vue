@@ -24,8 +24,8 @@
 
 <script>
 import { MONTHS } from "@/enums/dates.js";
-import ActivityListItem from "./ActivityListItem.vue";
-import MonthSeparator from "./MonthSeparator.vue";
+import ActivityListItem from "@/components/activity/ActivityListItem.vue";
+import MonthSeparator from "@/components/activity/MonthSeparator.vue";
 import { COLORS } from "@/styles/colors.js";
 
 export default {

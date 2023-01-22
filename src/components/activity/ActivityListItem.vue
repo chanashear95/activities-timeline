@@ -40,7 +40,7 @@
 import LineSeparator from "@/components/common/LineSeparator.vue";
 import ActivityIcon from "@/components/activity/ActivityIcon.vue";
 import { formatDate } from "@/utils/formatting";
-import Score from "./Score.vue";
+import Score from "@/components/activity/Score.vue";
 import { generateFullActivityName } from "@/utils/dataHelpers";
 import { RESOURCE_TYPES } from "@/enums/dataTypes";
 import ApiV from "@/mixins/apiV.vue";
