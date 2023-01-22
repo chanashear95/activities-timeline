@@ -5,7 +5,7 @@
     <div v-else>
       <SearchBar @update-search="updateSearch" :autocomplete="autoCompleteOptions" />
       <FilterBy @update-selected="updateFilterBy" :selected="filterBy" />
-      <ActivityList :list="displayedActivities" />
+      <ActivityList :list="filteredActivities" />
     </div>
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
     allActivities() {
       return this.$store.state.activities;
     },
-    displayedActivities() {
+    filteredActivities() {
       return this.allActivities.filter(
         item =>
           (this.filterBy.length === 0 || this.filterBy.includes(item.resource_type)) &&
@@ -52,7 +52,7 @@ export default {
       );
     },
     autoCompleteOptions() {
-      return this.displayedActivities.map(item => capitalize(generateFullActivityName(item)));
+      return this.filteredActivities.map(item => capitalize(generateFullActivityName(item)));
     }
   },
   methods: {

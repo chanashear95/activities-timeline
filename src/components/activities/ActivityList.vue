@@ -1,16 +1,25 @@
 <template>
-  <v-list class="mt-2">
-    <v-list-item v-for="(item, i) in list" :key="item.id">
-      <div class="flex-column d-flex">
-        <MonthSeparator
-          v-if="isNewMonth(i)"
-          :month="getMonthString(item.d_created)"
-          :hide-line="i === 0"
-        />
-        <ActivityListItem :item="item" />
-      </div>
-    </v-list-item>
-  </v-list>
+  <div>
+    <v-list class="mt-2">
+      <v-list-item v-for="(item, i) in paginatedList" :key="item.id">
+        <div class="flex-column d-flex">
+          <MonthSeparator
+            v-if="isNewMonth(i)"
+            :month="getMonthString(item.d_created)"
+            :hide-line="i === 0"
+          />
+          <ActivityListItem :item="item" />
+        </div>
+      </v-list-item>
+    </v-list>
+    <button
+      class="d-flex align-start mx-auto my-3 green-text font-weight-medium"
+      v-if="shouldShowLoadMoreBtn"
+      @click="loadMore"
+    >
+      <v-icon color="#008081">mdi-chevron-down</v-icon>Load more
+    </button>
+  </div>
 </template>
 
 <script>
@@ -20,10 +29,29 @@ import MonthSeparator from "./MonthSeparator.vue";
 
 export default {
   name: "ActivityList",
-  props: ["list"],
   components: {
     MonthSeparator,
     ActivityListItem
+  },
+  props: {
+    list: {
+      type: Array,
+      default: () => []
+    }
+  },
+  MAX_PER_SCROLL: 10,
+  data() {
+    return {
+      currentScroll: 1
+    };
+  },
+  computed: {
+    paginatedList() {
+      return this.list.slice(0, this.currentScroll * this.$options.MAX_PER_SCROLL);
+    },
+    shouldShowLoadMoreBtn() {
+      return this.paginatedList.length !== this.list.length;
+    }
   },
   methods: {
     isNewMonth(currIdx) {
@@ -35,6 +63,9 @@ export default {
     },
     getMonthString(date) {
       return MONTHS[new Date(Number(date) * 1000).getMonth()];
+    },
+    loadMore() {
+      this.currentScroll = this.currentScroll + 1;
     }
   }
 };
