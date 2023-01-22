@@ -24,7 +24,7 @@
         <v-icon @click="() => hideActivity(item.id)" size="20" color="#008081">mdi-eye</v-icon>
         <button
           v-if="doesItemSupportZoom(item)"
-          @click="() => $router.push(`/${item.id}`)"
+          @click="() => $router.push(getPath(item))"
           class="font-weight-medium pl-1 green-text"
         >
           View work
@@ -35,12 +35,13 @@
 </template>
 
 <script>
-import LineSeparator from "../common/LineSeparator.vue";
-import ActivityIcon from "./ActivityIcon.vue";
+import LineSeparator from "@/components/common/LineSeparator.vue";
+import ActivityIcon from "@/components/activity/ActivityIcon.vue";
 import { formatDate } from "@/utils/formatting";
 import Score from "./Score.vue";
 import { generateFullActivityName } from "@/utils/dataHelpers";
 import { RESOURCE_TYPES } from "@/enums/dataTypes";
+import ApiV from "@/mixins/apiV.vue";
 
 export default {
   name: "ActivityListItem",
@@ -49,6 +50,7 @@ export default {
     ActivityIcon,
     Score
   },
+  mixins: [ApiV],
   props: ["item"],
   methods: {
     formatDate,
@@ -58,6 +60,9 @@ export default {
     },
     doesItemSupportZoom(item) {
       return RESOURCE_TYPES[item.resource_type].zoom;
+    },
+    getPath(item) {
+      return this.$route.path + (this.isV2 ? "" : "v1") + `/activity/${item.id}`;
     }
   }
 };

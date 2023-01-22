@@ -12,7 +12,19 @@ const routes = [
     component: Activities,
     children: [
       {
-        path: ":activityId",
+        path: "v1/activity/:activityId",
+        component: Zoom,
+        props: true
+      }
+    ]
+  },
+  {
+    path: "/v2/",
+    name: "activitiesv2",
+    component: Activities,
+    children: [
+      {
+        path: "activity/:activityId",
         component: Zoom,
         props: true
       }

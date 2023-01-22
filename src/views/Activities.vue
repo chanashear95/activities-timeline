@@ -7,7 +7,7 @@
       <FilterBy @update-selected="updateFilterBy" :selected="filterBy" />
       <ActivityList :list="filteredActivities" />
     </div>
-    <router-view></router-view>
+    <router-view :key="$route.path"></router-view>
   </div>
 </template>
 
@@ -19,6 +19,7 @@ import FilterBy from "@/components/filters/FilterBy.vue";
 import SearchBar from "@/components/filters/SearchBar.vue";
 import { capitalize } from "@/utils/formatting";
 import { generateFullActivityName } from "@/utils/dataHelpers";
+import ApiV from "@/mixins/apiV.vue";
 
 export default {
   name: "Activities",
@@ -28,6 +29,7 @@ export default {
     SearchBar,
     FilterBy
   },
+  mixins: [ApiV],
   data() {
     return {
       loading: true,
@@ -36,7 +38,7 @@ export default {
     };
   },
   async mounted() {
-    await fetchActivities();
+    await fetchActivities(this.isV2);
     this.loading = false;
   },
   computed: {

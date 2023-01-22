@@ -11,7 +11,7 @@
       <v-card v-if="item" class="px-4 py-2 pb-4">
         <div class="d-flex justify-end  align-center">
           <button
-            @click="() => $router.replace('/')"
+            @click="navigatBack"
             class="font-weight-black rounded-circle outlined close-btn mb-2"
           >
             X
@@ -37,7 +37,8 @@
 import ActivityIcon from "@/components/activity/ActivityIcon.vue";
 import { generateFullActivityName } from "@/utils/dataHelpers";
 import { formatDate } from "@/utils/formatting";
-import Score from "../components/activity/Score.vue";
+import Score from "@/components/activity/Score.vue";
+import ApiV from "@/mixins/apiV.vue";
 
 export default {
   name: "Zoom",
@@ -45,6 +46,7 @@ export default {
     ActivityIcon,
     Score
   },
+  mixins: [ApiV],
   showDialog: true,
   computed: {
     item() {
@@ -53,7 +55,10 @@ export default {
   },
   methods: {
     generateFullActivityName,
-    formatDate
+    formatDate,
+    navigatBack() {
+      this.$router.replace(this.isV2 ? "/v2" : "/");
+    }
   }
 };
 </script>
