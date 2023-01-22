@@ -1,7 +1,7 @@
 <template>
   <div>
     <LineSeparator v-if="!hideLine" />
-    <div class="month-container rounded-pill">
+    <div class="month-container rounded-pill text-center">
       {{ month }}
     </div>
   </div>
@@ -31,6 +31,5 @@ export default {
 .month-container {
   background-color: var(--faded-yellow);
   width: 120px;
-  text-align: center;
 }
 </style>

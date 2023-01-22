@@ -1,8 +1,12 @@
 <template>
   <div class="screen-content">
-    <h1>Timeline</h1>
+    <h1 class="my-2">Timeline</h1>
     <Loading v-if="loading" />
-    <ActivityList v-else :list="activities" />
+    <div v-else>
+      <SearchBar @update-search="updateSearch" :autocomplete="autoCompleteOptions" />
+      <FilterBy @update-selected="updateFilterBy" :selected="filterBy" />
+      <ActivityList :list="displayedActivities" />
+    </div>
   </div>
 </template>
 
@@ -10,29 +14,53 @@
 import { fetchActivities } from "@/services/activities.js";
 import ActivityList from "../components/activities/ActivityList.vue";
 import Loading from "../components/common/Loading.vue";
+import FilterBy from "../components/filters/FilterBy.vue";
+import SearchBar from "../components/filters/SearchBar.vue";
+import { capitalize } from "@/utils/formatting";
+import { generateFullActivityName } from "../utils/dataHelpers";
 
 export default {
   name: "Activities",
   components: {
     Loading,
-    ActivityList
+    ActivityList,
+    SearchBar,
+    FilterBy
   },
   data() {
     return {
-      activities: [],
-      loading: true
+      loading: true,
+      search: "",
+      filterBy: []
     };
   },
   async mounted() {
-    this.getActivities();
+    await fetchActivities();
+    this.loading = false;
+  },
+  computed: {
+    allActivities() {
+      return this.$store.state.activities;
+    },
+    displayedActivities() {
+      return this.allActivities.filter(
+        item =>
+          (this.filterBy.length === 0 || this.filterBy.includes(item.resource_type)) &&
+          generateFullActivityName(item)
+            .toLowerCase()
+            .includes(this.search.toLowerCase())
+      );
+    },
+    autoCompleteOptions() {
+      return this.displayedActivities.map(item => capitalize(generateFullActivityName(item)));
+    }
   },
   methods: {
-    async getActivities() {
-      const data = await fetchActivities();
-      this.activities = data.sort((a, b) => {
-        return Number(a.d_created) > Number(b.d_created) ? -1 : 1;
-      });
-      this.loading = false;
+    updateSearch(val) {
+      this.search = val;
+    },
+    updateFilterBy(updatedFilters) {
+      this.filterBy = updatedFilters;
     }
   }
 };

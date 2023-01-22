@@ -1,4 +1,5 @@
 import { SERVER_URL } from "@/enums/config";
+import store from "@/store/store";
 
 export const fetchActivities = async () => {
   try {
@@ -8,10 +9,12 @@ export const fetchActivities = async () => {
         "Content-Type": "application/json"
       }
     });
-    const data = res.json();
-    return data;
+    const data = await res.json();
+    const sortedData = data.sort((a, b) => {
+      return Number(a.d_created) > Number(b.d_created) ? -1 : 1;
+    });
+    store.commit("setActivities", sortedData);
   } catch (e) {
-    console.error(e);
     return [];
   }
 };

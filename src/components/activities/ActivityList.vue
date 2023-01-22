@@ -1,5 +1,5 @@
 <template>
-  <v-list>
+  <v-list class="mt-2">
     <v-list-item v-for="(item, i) in list" :key="item.id">
       <div class="flex-column d-flex">
         <MonthSeparator
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     isNewMonth(currIdx) {
-      if (currIdx - 1 < 0) return true;
+      if (currIdx === 0) return true;
       const currMonth = new Date(Number(this.list[currIdx].d_created) * 1000).getMonth();
       const prevIdxMonth = new Date(Number(this.list[currIdx - 1].d_created) * 1000).getMonth();
       if (currMonth !== prevIdxMonth) return true;
@@ -41,6 +41,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .v-list-item {
+  padding: 0;
   ::v-deep div.flex-column {
     width: 100%;
   }
